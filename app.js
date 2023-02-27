@@ -3,7 +3,8 @@ const express = require('express');
 const fs = require('fs');
 const url = require('url');
 const crypto = require('crypto');
-const session = require('express-session')
+const session = require('express-session');
+const { query } = require('express');
 //const FileStore = require('session-file-store')(session)
 
 const app = express();
@@ -123,7 +124,7 @@ app.get('/loginact', (request, response) => {
         
         if(credentials[request.query.user].pass === crypto.createHash('sha256').update(request.query.pass).digest('hex')){
 
-            if(credentials[request.query.user].loggedIn === 1){
+            if(credentials[request.query.user].loggedIn === 1 && request.query.user !== 'admin'){
                 response.writeHeader(200);
                 response.end("ALREADY LOGGED IN");
                 return;
