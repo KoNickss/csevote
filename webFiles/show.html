@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../css/dist.css" rel="stylesheet">
+  <title>CSE Vote</title>
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+</head>
+<body>
+<div class="flex min-h-[100vh] justify-center items-center text-white" bg-[url('../../img/bground1.jpg')]>
+    <div class="md:max-w-[70vw] ml-auto mr-auto">
+        
+        <div class="min-w-[60vw] rounded-3xl flex flex-wrap sm:flex-nowrap items-center py-10 sm:py-100 px-8 pb-10 justify-center text-center">
+            <div class="my-5 md:w-2/3 items-center justify-center text-center">
+                <p class="text-3xl pb-10 font-extrabold tracking-wide">$VOTETEXT$</p>
+                
+                <div class="text-center text-white">
+                    <div class="kmscontainer">
+                        <div class="windows pr-5">
+                            <button type="button" class="rounded-xl w-full bg-[#0B5D1E] my-2 py-5 my-2 px-5 py-5 text-3xl font-bold tracking-wide justify-center items-center font-[manrope]">$YESVOTES$</button>
+                        </div>
+                        <div class="office pl-5">
+                            <button type="button" class="rounded-xl w-full bg-[#820933] my-2 py-5 px-5 py-5 text-3xl font-bold tracking-wide justify-center items-center font-[manrope]">$NOVOTES$</button>
+                        </div>
+                    </div>
+
+                    <p class="text-3xl pb-10 font-extrabold tracking-wide">$RESULT$</p>
+                    
+                </div>
+                
+            </div>
+        </div>
+
+
+        
+    </div>
+
+
+    <div class="text-white bold fixed bottom-4 flex flex-row flex-wrap sm:flex-nowrap items-center mx-50 justify-center ml-auto mr-auto mx-100 px-2 pt-100 text-md bg-purple md:bg-transparent">
+       
+        <button type="button" class="redir outline rounded-md py-1 md:py-3 bg-mycol2 px-3 md:px-7 outline-0  outline-white hover:bg-indigo-900 mx-2" onclick="location.href = '/logout';">
+            <span>Logout</span>
+        </button>
+    </div>
+
+</div>
+
+</body>
+
+<script>
+    setTimeout(function(){
+        location.reload(false);
+    }, 5000);
+</script>
+
+</html>

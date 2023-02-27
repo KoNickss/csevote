@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/css/dist.css" rel="stylesheet">
+  <title>ADMIN PANEL</title>
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+</head>
+<body>
+<div class="flex min-h-[100vh] justify-center items-center text-white">
+    <div class="md:max-w-[70vw] ml-auto mr-auto">
+        
+        <div class="min-w-[60vw] rounded-3xl flex flex-wrap sm:flex-nowrap items-center py-10 sm:py-100 px-8 pb-10 justify-center text-center">
+            <div class="my-5 md:w-2/3 items-center justify-center text-center">
+                <p class="text-3xl pb-10 font-extrabold tracking-wide">ADMIN PANEL</p>
+                
+                <div class="text-center text-white">
+                    <input type="url" id="text" class="text-xl rounded-xl text-black py-3 px-3 w-full" placeholder="PROPUNERE">
+                    <p class="pb-10"> </p>
+                    <button type="button" class="rounded-xl w-full bg-indigo-900 my-2 py-5 my-2 px-5 text-sm md:text-xl font-bold tracking-wide justify-center items-center font-[manrope]" id="startvot">STARTVOT</button>
+                    <button type="button" class="rounded-xl w-full bg-indigo-900 my-2 py-5 my-2 px-5 text-sm md:text-xl font-bold tracking-wide justify-center items-center font-[manrope]" id="show">REZULTATE - STOP VOT</button>
+                    <button type="button" class="rounded-xl w-full bg-indigo-900 my-2 py-5 my-2 px-5 text-sm md:text-xl font-bold tracking-wide justify-center items-center font-[manrope]" id="clear">STERGE TABLA</button>
+
+                    <p class="text-3xl pb-10 font-extrabold tracking-wide">PAROLE</p>
+
+                    <button type="button" class="rounded-xl w-full bg-indigo-900 my-2 py-5 my-2 px-5 text-sm md:text-xl font-bold tracking-wide justify-center items-center font-[manrope]" id="pass">SETEAZA PAROLELE</button>
+                    <button type="button" class="rounded-xl w-full bg-indigo-900 my-2 py-5 my-2 px-5 text-sm md:text-xl font-bold tracking-wide justify-center items-center font-[manrope]" id="writerepo">SALVEAZA PAROLELE</button>
+
+                    <p class="text-3xl pb-10 font-extrabold tracking-wide">AUDIT</p>
+
+                    <button type="button" class="rounded-xl w-full bg-indigo-900 my-2 py-5 my-2 px-5 text-sm md:text-xl font-bold tracking-wide justify-center items-center font-[manrope]" id="audit">ARATA AUDIT</button>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+
+</body>
+
+<script>
+
+    var propunere = document.getElementById("text");
+
+    var start = document.getElementById("startvot");
+
+    var show = document.getElementById("show");
+
+    var clear = document.getElementById("clear");
+
+    var pass = document.getElementById("pass");
+
+    var writerepo = document.getElementById("writerepo");
+
+    var audit = document.getElementById("audit");
+
+
+    start.addEventListener("click", function(){
+        var url= "/admindo?do=start-vot&text=" + text.value;
+        location.href = url;
+    });
+    show.addEventListener("click", function(){
+        var url= "/admindo?do=show";
+        location.href = url;
+    });
+    clear.addEventListener("click", function(){
+        var url= "/admindo?do=clear";
+        location.href = url;
+    });
+    pass.addEventListener("click", function(){
+        var url= "/admindo?do=pass";
+        location.href = url;
+    });
+    writerepo.addEventListener("click", function(){
+        var url= "/admindo?do=writerepo";
+        location.href = url;
+    });
+
+    audit.addEventListener("click", function(){
+        var url= "/admindo?do=getaudit";
+        location.href = url;
+    });
+    
+</script>
+
+</html>

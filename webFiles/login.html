@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/css/dist.css" rel="stylesheet">
+  <title>CSE Vote</title>
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+</head>
+<body>
+<div class="flex min-h-[100vh] justify-center items-center text-white">
+    <div class="md:max-w-[70vw] ml-auto mr-auto">
+        
+        <div class="min-w-[60vw] rounded-3xl flex flex-wrap sm:flex-nowrap items-center py-10 sm:py-100 px-8 pb-10 justify-center text-center">
+            <div class="my-5 md:w-2/3 items-center justify-center text-center">
+                <p class="text-3xl pb-10 font-extrabold tracking-wide">CSE Vote Login</p>
+                
+                <div class="text-center text-white">
+                    <input type="url" id="user" class="text-xl rounded-xl text-black py-3 px-3 w-full" placeholder="Clasa">
+                    <p class="pb-10"> </p>
+                    <input type="url" id="pass" class="text-xl rounded-xl text-black py-3 px-3 w-full" placeholder="Parola">
+                    <p class="pb-10"> </p>
+                    <button type="button" class="rounded-xl w-full bg-indigo-900 my-2 py-5 my-2 px-5 text-sm md:text-xl font-bold tracking-wide justify-center items-center font-[manrope]" id="ok">Login</button>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+
+</body>
+
+<script>
+
+    var user = document.getElementById("user");
+    var pass = document.getElementById("pass");
+
+    var submit = document.getElementById("ok");
+
+
+    submit.addEventListener("click", function(){
+        var url= "/loginact?user=" + user.value + "&pass=" + pass.value;
+        location.href = url;
+    });
+
+</script>
+
+</html>

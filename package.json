@@ -1,0 +1,17 @@
+{
+  "name": "csevote",
+  "version": "1.0.0",
+  "description": "CSE voting system",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Puly",
+  "license": "0BSD",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "session-file-store": "^1.5.0"
+  }
+}
