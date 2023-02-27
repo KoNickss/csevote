@@ -30,6 +30,12 @@
                     <p class="text-3xl pb-10 font-extrabold tracking-wide">AUDIT</p>
 
                     <button type="button" class="rounded-xl w-full bg-indigo-900 my-2 py-5 my-2 px-5 text-sm md:text-xl font-bold tracking-wide justify-center items-center font-[manrope]" id="audit">ARATA AUDIT</button>
+
+                    <p class="text-3xl pb-10 font-extrabold tracking-wide">PREZENTA</p>
+
+                    <button type="button" class="rounded-xl w-full bg-indigo-900 my-2 py-5 my-2 px-5 text-sm md:text-xl font-bold tracking-wide justify-center items-center font-[manrope]" id="prezent">FA PREZENTA</button>
+
+                    <button type="button" class="rounded-xl w-full bg-indigo-900 my-2 py-5 my-2 px-5 text-sm md:text-xl font-bold tracking-wide justify-center items-center font-[manrope]" id="stopprezent">STOP PREZENTA</button>
                 </div>
                 
             </div>
@@ -57,6 +63,10 @@
 
     var audit = document.getElementById("audit");
 
+    var prezent = document.getElementById("prezent");
+
+    var stopprezent = document.getElementById("stopprezent");
+
 
     start.addEventListener("click", function(){
         var url= "/admindo?do=start-vot&text=" + text.value;
@@ -81,6 +91,16 @@
 
     audit.addEventListener("click", function(){
         var url= "/admindo?do=getaudit";
+        location.href = url;
+    });
+
+    prezent.addEventListener("click", function(){
+        var url= "/admindo?do=prezenta";
+        location.href = url;
+    });
+
+    stopprezent.addEventListener("click", function(){
+        var url= "/admindo?do=stopprezenta";
         location.href = url;
     });
     

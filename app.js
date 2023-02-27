@@ -25,6 +25,8 @@ var voteText = "Sunteti de acord cu initiativa X?";
 var yesVotes = 0;
 var noVotes = 0;
 
+var prezentaKey = 0;
+
 if(!fs.existsSync('repo/secret')){
     secret = crypto.randomBytes(35).toString('hex');
     fs.writeFileSync('repo/secret', secret);
@@ -48,7 +50,11 @@ app.use(session({
 function report(str){
     console.log(str);
     logString = logString.concat('\n', str);
-}   
+}
+
+function randomIntForPrezenta() {
+    return Math.floor(Math.random() * (999 - 100 + 1) + 100);
+}
 
 
 
@@ -162,6 +168,25 @@ app.get('/home', (request, response) => {
             });
         }
 
+        if(activity === "prezenta"){
+            if(credentials[request.session.user].present === 0){
+                fs.readFile('./webFiles/prezent.html', function(error, content){
+                    if(error) report(error);
+            
+                    response.writeHead(200, {'Content-Type': 'text/html'});
+                    response.end(content);
+                });
+            }else{
+                fs.readFile('./webFiles/noactivity.html', function(error, content){
+                    if(error) report(error);
+            
+                    contentx = content.toString().replace("$USER$" , request.session.user);
+                    response.writeHead(200, {'Content-Type': 'text/html'});
+                    response.end(contentx);
+                });
+            }
+        }
+
         if(activity === "vote" && credentials[request.session.user].votingRights === 1){
             fs.readFile('./webFiles/vote.html', function(error, content){
                 if(error) report(error);
@@ -242,13 +267,13 @@ app.get('/dashboard', (request, response) => {
 app.get('/vote/yes', (request, response) => {
     
     if(request.session.user){
-        if(credentials[request.session.user].votingRights === 1){
+        if(credentials[request.session.user].votingRights === 1 && credentials[request.session.user].present === 1){
             credentials[request.session.user].votingRights = 0;
             yesVotes++;
             report(request.session.user + " - YES");
         }else{
             response.writeHead(200);
-            response.end("ALREADY VOTED");
+            response.end("AI VOTAT DEJA / NU ESTI PREZENT");
             return;
         }
     }
@@ -261,13 +286,30 @@ app.get('/vote/yes', (request, response) => {
 app.get('/vote/no', (request, response) => {
 
     if(request.session.user){
-        if(credentials[request.session.user].votingRights === 1){
+        if(credentials[request.session.user].votingRights === 1 && credentials[request.session.user].present === 1){
             credentials[request.session.user].votingRights = 0;
             noVotes++;
             report(request.session.user + " - NO");
         }else{
             response.writeHead(200);
-            response.end("ALREADY VOTED");
+            response.end("AI VOTAT DEJA / NU ESTI PREZENT");
+            return;
+        }
+    }
+
+    response.redirect('/home');
+    response.end();
+    return;
+});
+
+app.get('/prezenta', (request, response) => {
+
+    if(request.session.user && activity === 'prezenta'){
+        if(request.query.key === prezentaKey.toString()){
+            credentials[request.session.user].present = 1;
+        }else{
+            response.writeHead(200);
+            response.end('BAD CODE');
             return;
         }
     }
@@ -331,6 +373,25 @@ app.get('/admindo', (request, response) => {
             response.writeHead(200);
             response.end(logString);
             return;
+        }
+
+        if(request.query.do === 'prezenta'){
+            report("------------START PREZENTA------------");
+            activity = 'prezenta';
+            prezentaKey = randomIntForPrezenta();
+            report("KEY: " + prezentaKey);
+        }
+
+        if(request.query.do === 'stopprezenta'){
+            activity = 'none';
+            report("------------PREZENTA------------");
+            var prezenti = 0;
+            Object.keys(credentials).forEach(function(key) {
+                report(key.toString() + " - " + (credentials[key].present && credentials[key].loggedIn));
+                if(credentials[key].present && credentials[key].loggedIn) prezenti++;
+            });
+            report("++ PREZENTI: " + prezenti.toString() + " ++");
+            report("------------PREZENTA------------");
         }
     }
 

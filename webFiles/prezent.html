@@ -13,14 +13,12 @@
         
         <div class="min-w-[60vw] rounded-3xl flex flex-wrap sm:flex-nowrap items-center py-10 sm:py-100 px-8 pb-10 justify-center text-center">
             <div class="my-5 md:w-2/3 items-center justify-center text-center">
-                <p class="text-3xl pb-10 font-extrabold tracking-wide">CSE Vote Login</p>
+                <p class="text-3xl pb-10 font-extrabold tracking-wide">CSE Prezenta</p>
                 
                 <div class="text-center text-white">
-                    <input type="text" id="user" class="text-xl rounded-xl text-black py-3 px-3 w-full" placeholder="Clasa">
+                    <input type="tel" id="cod" class="text-xl rounded-xl text-black py-3 px-3 w-full" placeholder="Cod">
                     <p class="pb-10"> </p>
-                    <input type="password" id="pass" class="text-xl rounded-xl text-black py-3 px-3 w-full" placeholder="Parola">
-                    <p class="pb-10"> </p>
-                    <button type="button" class="rounded-xl w-full bg-indigo-900 my-2 py-5 my-2 px-5 text-sm md:text-xl font-bold tracking-wide justify-center items-center font-[manrope]" id="ok">Login</button>
+                    <button type="button" class="rounded-xl w-full bg-indigo-900 my-2 py-5 my-2 px-5 text-sm md:text-xl font-bold tracking-wide justify-center items-center font-[manrope]" id="ok">Adaugare la Prezenta</button>
                 </div>
                 
             </div>
@@ -34,14 +32,13 @@
 
 <script>
 
-    var user = document.getElementById("user");
-    var pass = document.getElementById("pass");
+    var cod = document.getElementById("cod");
 
     var submit = document.getElementById("ok");
 
 
     submit.addEventListener("click", function(){
-        var url= "/loginact?user=" + user.value + "&pass=" + pass.value;
+        var url= "/prezenta?key=" + cod.value;
         location.href = url;
     });
 
