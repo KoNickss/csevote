@@ -78,6 +78,18 @@ function takeVotingRights(){
     });
 }
 
+function nullPrezenta(){
+    Object.keys(credentials).forEach(function(key) {
+        credentials[key].present = 0;
+    });
+}
+
+function nullLogStatus(){
+    Object.keys(credentials).forEach(function(key) {
+        credentials[key].loggedIn = 0;
+    });
+}
+
 
 app.get('/', (request, response) => {
     
@@ -392,6 +404,20 @@ app.get('/admindo', (request, response) => {
             });
             report("++ PREZENTI: " + prezenti.toString() + " ++");
             report("------------PREZENTA------------");
+        }
+        if(request.query.do === 'reset'){
+
+            takeVotingRights();
+            nullLogStatus();
+            nullPrezenta();
+
+            activity = 'null';
+
+            logString = '';
+
+            response.redirect('/logout');
+            response.end();
+            return;
         }
     }
 
