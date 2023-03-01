@@ -134,19 +134,21 @@ app.get('/loginact', (request, response) => {
 
     if(request.query.user && request.query.pass){
 
+        var quser = request.query.user.toLowerCase();
+
         if(activity === 'pass'){
-            credentials[request.query.user].pass = crypto.createHash('sha256').update(request.query.pass).digest('hex');
-            report(request.query.user + " RESET THEIR PASSWORD");
+            credentials[quser].pass = crypto.createHash('sha256').update(quser).digest('hex');
+            report(quser + " RESET THEIR PASSWORD");
             response.writeHead(200);
             response.end('PASSWORS SET SUCCESFULLY!');
             return;
         }
         
-        if(credentials[request.query.user].pass === crypto.createHash('sha256').update(request.query.pass).digest('hex')){
+        if(credentials[quser].pass === crypto.createHash('sha256').update(request.query.pass).digest('hex')){
 
-            request.session.user = request.query.user;
-            credentials[request.query.user].loggedIn = 1;
-            report("LOG IN: " + request.query.user);
+            request.session.user = quser;
+            credentials[quser].loggedIn = 1;
+            report("LOG IN: " + quser);
         }
 
     }
@@ -337,6 +339,10 @@ app.get('/admin', (request, response) => {
             response.end(content);
             return;
         });
+    }else{
+        response.redirect('/');
+        response.end();
+        return;
     }
 });
 
