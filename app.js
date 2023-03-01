@@ -137,16 +137,12 @@ app.get('/loginact', (request, response) => {
         if(activity === 'pass'){
             credentials[request.query.user].pass = crypto.createHash('sha256').update(request.query.pass).digest('hex');
             report(request.query.user + " RESET THEIR PASSWORD");
+            response.writeHead(200);
+            response.end('PASSWORS SET SUCCESFULLY!');
             return;
         }
         
         if(credentials[request.query.user].pass === crypto.createHash('sha256').update(request.query.pass).digest('hex')){
-
-            if(credentials[request.query.user].loggedIn === 1 && request.query.user !== 'admin'){
-                response.writeHeader(200);
-                response.end("ALREADY LOGGED IN");
-                return;
-            }
 
             request.session.user = request.query.user;
             credentials[request.query.user].loggedIn = 1;
