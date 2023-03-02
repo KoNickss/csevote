@@ -5,7 +5,7 @@ const url = require('url');
 const crypto = require('crypto');
 const session = require('express-session');
 const { query } = require('express');
-//const FileStore = require('session-file-store')(session)
+const FileStore = require('session-file-store')(session)
 
 const app = express();
 
@@ -43,8 +43,8 @@ app.use(session({
     secret: secret.toString(),
     saveUninitialized:false,
     resave:false,
-    cookie: {maxAge: 120000}
-    //store:new FileStore()
+   	//cookie: {maxAge: none}
+    store:new FileStore()
 }));
 
 function report(str){
