@@ -413,7 +413,7 @@ app.get('/admindo', (request, response) => {
             nullLogStatus();
             nullPrezenta();
 
-            activity = 'null';
+            activity = 'none';
 
             logString = '';
 
