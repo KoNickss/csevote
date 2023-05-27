@@ -31,3 +31,10 @@ Run with db volume
 
 `docker run -d -p 811:80 -v foo-volume:/app/repo vianuvote`
 
+ACESTA ESTE UN DEMO SUMAR
+
+
+LIBRARII EXTERNE:
+- NodeJS
+- ExpressJS
+- TailwindCSS
