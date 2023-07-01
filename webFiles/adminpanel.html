@@ -40,6 +40,13 @@
                     <p class="text-3xl pb-10 font-extrabold tracking-wide">RESET</p>
 
                     <button type="button" class="rounded-xl w-full bg-indigo-900 my-2 py-5 my-2 px-5 text-sm md:text-xl font-bold tracking-wide justify-center items-center font-[manrope]" onclick="location.href='/admindo?do=reset';">RESET</button>
+										<p class="text-3xl pb-10 font-extrabold tracking-wide">REGISTER USER</p>
+										<input type="text" id="newuser" class="text-xl rounded-xl text-black py-3 px-3 w-full" placeholder="USERNAME">
+                    <p class="pb-10"> </p>
+										<input type="password" id="newpass" class="text-xl rounded-xl text-black py-3 px-3 w-full" placeholder="PASSWORD">
+                    <p class="pb-10"> </p>
+                    <button type="button" class="rounded-xl w-full bg-indigo-900 my-2 py-5 my-2 px-5 text-sm md:text-xl font-bold tracking-wide justify-center items-center font-[manrope]" id="register">REGISTER</button>
+
                 </div>
                 
             </div>
@@ -61,7 +68,7 @@
 
     var clear = document.getElementById("clear");
 
-    var pass = document.getElementById("pass");
+		var pass = document.getElementById("pass");
 
     var writerepo = document.getElementById("writerepo");
 
@@ -71,6 +78,11 @@
 
     var stopprezent = document.getElementById("stopprezent");
 
+		var newuser = document.getElementById("newuser");
+
+		var newpass = document.getElementById("newpass");
+
+		var register = document.getElementById("register");
 
     start.addEventListener("click", function(){
         var url= "/admindo?do=start-vot&text=" + text.value;
@@ -107,6 +119,11 @@
         var url= "/admindo?do=stopprezenta";
         location.href = url;
     });
+
+		register.addEventListener("click",function(){
+				var url= "admindo?do=register&user=" + newuser.value + "&password=" + newpass.value;
+        location.href = url;
+		});
     
 </script>
 
