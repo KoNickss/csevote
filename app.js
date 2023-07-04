@@ -144,13 +144,11 @@ app.get('/loginact', (request, response) => {
             return;
         }
         
-        if(credentials[quser].pass === crypto.createHash('sha256').update(request.query.pass).digest('hex')){
-
-            request.session.user = quser;
-            credentials[quser].loggedIn = 1;
-            report("LOG IN: " + quser);
+        if(credentials[quser].pass == crypto.createHash('sha256').update(request.query.pass + credentials[quser].salt).digest('hex')){
+					request.session.user = quser;
+					credentials[quser].loggedIn = 1;
+					report("LOG IN: " + quser);
         }
-
     }
 
     response.redirect('/home');
@@ -421,6 +419,23 @@ app.get('/admindo', (request, response) => {
             response.end();
             return;
         }
+				if(request.query.do === 'register'){
+					var newuser=request.query.user;
+					var newpass=request.query.password;
+					if(credentials[newuser])
+						report("USER "+ newuser + " ALREADY REGISTERED");
+					else {
+						credentials[newuser]={};
+						credentials[newuser].salt=crypto.randomBytes(16).toString('hex');
+						credentials[newuser].pass=crypto.createHash('sha256').update(newpass + credentials[newuser].salt).digest('hex');
+						report("USER " + newuser + " REGISTERED WITH " + newpass + credentials[newuser].salt);
+						credentials[newuser].votingRights = 0;
+						credentials[newuser].loggedIn = 0;
+						credentials[newuser].present = 0;
+						fs.writeFileSync('repo/credentials', JSON.stringify(credentials));
+					}
+					return;
+				}
     }
 
     response.redirect('/admin');
@@ -454,4 +469,4 @@ app.get('/css/manrope.ttf', (request, response) => {
 
 
 const server = http.createServer(app);
-server.listen(8881);
+server.listen(80);
