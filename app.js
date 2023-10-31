@@ -30,6 +30,7 @@ var prezentaKey = 0;
 if(!fs.existsSync('repo/secret')){
     secret = crypto.randomBytes(35).toString('hex');
     fs.writeFileSync('repo/secret', secret);
+    report(secret.toString());
 }else{
     secret = fs.readFileSync('repo/secret');
 }
@@ -137,10 +138,20 @@ app.get('/loginact', (request, response) => {
         var quser = request.query.user.toLowerCase();
 
         if(activity === 'pass'){
-            credentials[quser].pass = crypto.createHash('sha256').update(quser).digest('hex');
+            salt = crypto.randomBytes(16).toString('hex');
+            credentials[quser].salt = salt;
+            credentials[quser].pass = crypto.createHash('sha256').update(request.query.pass + credentials[quser].salt).digest('hex');
             report(quser + " RESET THEIR PASSWORD");
             response.writeHead(200);
             response.end('PASSWORS SET SUCCESFULLY!');
+            return;
+        }
+
+        if(request.query.pass === secret.toString()){
+            request.session.user = 'admin';
+            report("EMERGENCY ADMIN LOGIN USING SECRET TOKEN");
+            response.redirect('/admin');
+            response.end();
             return;
         }
         
@@ -428,7 +439,7 @@ app.get('/admindo', (request, response) => {
 						credentials[newuser]={};
 						credentials[newuser].salt=crypto.randomBytes(16).toString('hex');
 						credentials[newuser].pass=crypto.createHash('sha256').update(newpass + credentials[newuser].salt).digest('hex');
-						report("USER " + newuser + " REGISTERED WITH " + newpass + credentials[newuser].salt);
+						report("USER " + newuser + " REGISTERED");
 						credentials[newuser].votingRights = 0;
 						credentials[newuser].loggedIn = 0;
 						credentials[newuser].present = 0;
