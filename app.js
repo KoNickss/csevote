@@ -445,6 +445,8 @@ app.get('/admindo', (request, response) => {
 						credentials[newuser].present = 0;
 						fs.writeFileSync('repo/credentials', JSON.stringify(credentials));
 					}
+                    response.redirect('/admin');
+                    response.end(); 
 					return;
 				}
     }
@@ -469,6 +471,18 @@ app.get('/css/dist.css', (request, response) => {
 app.get('/css/manrope.ttf', (request, response) => {
     
     fs.readFile('./css/manrope.ttf', function(error, content){
+        if(error) report(error);
+
+        response.writeHead(200, {'Content-Type': 'font/ttf'});
+        response.end(content);
+    });
+
+    return;
+});
+
+app.get('/css/jetbrains.ttf', (request, response) => {
+    
+    fs.readFile('./css/jetbrains.ttf', function(error, content){
         if(error) report(error);
 
         response.writeHead(200, {'Content-Type': 'font/ttf'});
