@@ -82,6 +82,22 @@ p{
 .nineteen { grid-area: nineteen; }
 
 .legacy { grid-area: legacy; }
+
+.adminpage {  display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "controls controls report"
+        "controls controls report"
+        "controls controls report";
+}
+
+.controls { grid-area: controls; }
+
+.report { grid-area: report; }
+  
   
 
 .wave {

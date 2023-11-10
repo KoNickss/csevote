@@ -343,9 +343,9 @@ app.get('/admin', (request, response) => {
     if(request.session.user === 'admin'){
         fs.readFile('./webFiles/adminpanel.html', function(error, content){
             if(error) report(error);
-    
+            contentx = content.toString().replace("$REPORT$" , logString);
             response.writeHead(200, {'Content-Type': 'text/html'});
-            response.end(content);
+            response.end(contentx);
             return;
         });
     }else{

@@ -8,6 +8,8 @@
   <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 </head>
 <body>
+<div class="adminpage">
+<div class="controls">
 <div class="flex min-h-[100vh] justify-center items-center text-teal-950 bg-green-100">
     <div class="md:max-w-[70vw] ml-auto mr-auto">
         
@@ -66,7 +68,14 @@
     </div>
 
 </div>
+</div>
 
+<div class="report bg-green-100">
+    <textarea class="text-lg text-semibold w-full h-1/3" id="textarea_id">$REPORT$</textarea>
+</div>
+
+
+</div>
 </body>
 
 <script>
@@ -79,7 +88,7 @@
 
     var clear = document.getElementById("clear");
 
-		var pass = document.getElementById("pass");
+	var pass = document.getElementById("pass");
 
     var writerepo = document.getElementById("writerepo");
 
@@ -89,11 +98,14 @@
 
     var stopprezent = document.getElementById("stopprezent");
 
-		var newuser = document.getElementById("newuser");
+	var newuser = document.getElementById("newuser");
 
-		var newpass = document.getElementById("newpass");
+	var newpass = document.getElementById("newpass");
 
-		var register = document.getElementById("register");
+	var register = document.getElementById("register");
+
+    var textarea = document.getElementById('textarea_id');
+    textarea.scrollTop = textarea.scrollHeight;
 
     start.addEventListener("click", function(){
         var url= "/admindo?do=start-vot&text=" + text.value;
@@ -131,10 +143,10 @@
         location.href = url;
     });
 
-		register.addEventListener("click",function(){
-				var url= "admindo?do=register&user=" + newuser.value + "&password=" + newpass.value;
+    register.addEventListener("click",function(){
+        var url= "admindo?do=register&user=" + newuser.value + "&password=" + newpass.value;
         location.href = url;
-		});
+    });
     
 </script>
 

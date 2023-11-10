@@ -19,9 +19,9 @@ Login details are securely stored as sha256sums in repo/credentials
 
 ## Docker
 
-Build docker image
+Build docker image / Pull docker image from hub
 
-`docker build -t vianuvote .`
+`docker build -t vianuvote .`  /  `docker pull konicks/vianuvote`
 
 Run without db volume
 
